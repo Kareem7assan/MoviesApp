@@ -1,0 +1,104 @@
+import deps.Config
+import deps.Deps
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion Config.compileSdk
+    buildToolsVersion Config.buildToolsSdk
+
+
+    defaultConfig {
+        applicationId Config.id
+        minSdkVersion Config.minsdk
+        targetSdkVersion Config.targetsdk
+        versionCode Config.version_code
+        versionName Config.version_name
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kapt {
+        correctErrorTypes = true
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    //essentials
+    implementation Deps.kotlin.stdLib
+    implementation Deps.androidx.core
+    implementation Deps.androidx.appCompat
+    implementation Deps.androidx.constraintLayout
+    implementation Deps.android.material
+    implementation Deps.android.material
+    //hilt
+    implementation Deps.dagger_hilt.hilt
+    kapt Deps.dagger_hilt.hilt_compiler
+    //room
+    implementation Deps.jetpack.room
+    implementation Deps.jetpack.roomKtx
+    kapt Deps.jetpack.compilerRoom
+    //retrofit
+    implementation Deps.retrofit.retrofit_lib
+    implementation Deps.retrofit.gson
+    implementation Deps.retrofit.okHttp
+
+    //anko
+    implementation Deps.anko.anko
+
+    //ktx
+    implementation Deps.ktx.ktx
+    implementation Deps.ktx.ktx_activity
+
+    //coroutines
+    implementation Deps.coroutines.core
+    implementation Deps.coroutines.android
+    implementation Deps.jetpack.lifeCycle
+
+
+    //unit test
+    testImplementation Deps.test.junit
+    testImplementation Deps.test.mockito
+    testImplementation Deps.test.archTest
+    testImplementation Deps.test.truthTest
+    testImplementation Deps.jetpack.testRoom
+    androidTestImplementation Deps.test.testRules
+    androidTestImplementation Deps.test.hamCrest
+    androidTestImplementation Deps.test.espresso
+    androidTestImplementation Deps.test.uIAutomator
+    
+    //navigation
+    implementation Deps.androidx.navigation.fragment
+    implementation Deps.androidx.navigation.ui
+
+
+
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
+
+
+}
