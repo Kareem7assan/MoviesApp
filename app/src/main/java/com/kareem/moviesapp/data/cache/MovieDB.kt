@@ -2,11 +2,11 @@ package com.kareem.moviesapp.data.cache
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.kareem.moviesapp.data.model.movies_model.Movie
 
 
-@Database(entities = [WeatherModel::class], version = 1, exportSchema = false)
-@TypeConverters(WeatherTypeConverter::class, WeatherListTypeConverters::class)
+@Database(entities = [Movie::class], version = 1, exportSchema = false)
 abstract class MovieDB : RoomDatabase(){
-    abstract fun weatherDao(): MovieDao
+    abstract fun movieDao(): MovieDao
 
 }

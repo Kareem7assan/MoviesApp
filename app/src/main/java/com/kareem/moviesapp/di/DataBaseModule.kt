@@ -16,7 +16,7 @@ import javax.inject.Singleton
 object DataBaseModule {
 
         @Provides
-        fun provideChannelDao(movieDB: MovieDB): MovieDao = movieDB.weatherDao()
+        fun provideChannelDao(movieDB: MovieDB): MovieDao = movieDB.movieDao()
 
         @Provides
         @Singleton
