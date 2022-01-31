@@ -13,7 +13,7 @@ class MoviesRepositoryImp @Inject constructor(
     private val api: MoviesApi,
     private val db: MovieDao
 ): MoviesRepository  {
-    override suspend fun getMoviesCache(): Flow<List<Movie>> {
+    override suspend fun getMoviesCache(): List<Movie> {
         return db.getAllMovies()
     }
 

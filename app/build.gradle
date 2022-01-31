@@ -86,15 +86,18 @@ dependencies {
     testImplementation Deps.test.mockito
     testImplementation Deps.test.archTest
     testImplementation Deps.test.truthTest
+
     testImplementation Deps.jetpack.testRoom
     androidTestImplementation Deps.test.testRules
     androidTestImplementation Deps.test.hamCrest
     androidTestImplementation Deps.test.espresso
     androidTestImplementation Deps.test.uIAutomator
-    
+    androidTestImplementation Deps.test.junitAndroid
+    androidTestImplementation Deps.test.truthTest
     //navigation
     implementation Deps.androidx.navigation.fragment
     implementation Deps.androidx.navigation.ui
+
 
 
 

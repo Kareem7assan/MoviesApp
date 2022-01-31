@@ -15,7 +15,7 @@ object Versions {
     const val ktxKotlin = "1.1.1"
     const val ktxFragment = "1.2.0"
     //test
-    const val junitAndroid = "1.1.1"
+    const val junitAndroid = "1.1.3"
     const val espressoAndroid = "3.4.0"
     const val mockito = "1.10.19"
     const val roboElectric = "1.0.0"
