@@ -84,10 +84,12 @@ dependencies {
     //unit test
     testImplementation Deps.test.junit
     testImplementation Deps.test.mockito
+    testImplementation Deps.test.mockitoKotlin
     testImplementation Deps.test.archTest
     testImplementation Deps.test.truthTest
-
+    testImplementation Deps.test.testCoroutine
     testImplementation Deps.jetpack.testRoom
+
     androidTestImplementation Deps.test.testRules
     androidTestImplementation Deps.test.hamCrest
     androidTestImplementation Deps.test.espresso
@@ -97,7 +99,6 @@ dependencies {
     //navigation
     implementation Deps.androidx.navigation.fragment
     implementation Deps.androidx.navigation.ui
-
 
 
 

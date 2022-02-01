@@ -35,8 +35,17 @@ object Deps {
 
         const val roboElectric = "androidx.test:core:${Versions.roboElectric}"
         const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
+        const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockito}"
+       /* testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+        // required if you want to use Mockito for unit tests
+        testImplementation 'org.mockito:mockito-core:2.24.5'
+        // required if you want to use Mockito for Android tests
+        androidTestImplementation 'org.mockito:mockito-android:2.24.5'
+*/
         const val archTest = "androidx.arch.core:core-testing:${Versions.archTest}"
         const val truthTest = "com.google.truth:truth:${Versions.truth}"
+
+        const val testCoroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.testCoroutine}"
 
 
         const val espressoAndroid =

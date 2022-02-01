@@ -18,9 +18,8 @@ class MoviesRepositoryImp @Inject constructor(
     }
 
     override suspend fun getMovies(page:Int): Flow<Response<MoviesModel>> {
-        return flow {
-            emit(api.getLatestMovies(page = page))
-        }
+        return flow { emit(api.getLatestMovies(page = page)) }
+
     }
 
     override suspend fun saveMovies(movies: List<Movie>) {
@@ -28,11 +27,11 @@ class MoviesRepositoryImp @Inject constructor(
     }
 
     override suspend fun markAsFav(movie: Movie) {
-        db.markAsFavourite(movie.copy(hasFav = true))
+        db.markAsFavourite(movie)
     }
 
-    override suspend fun markAsUnFav(movies: Movie) {
-        db.markAsUnFavourite(movies.copy(hasFav = false))
+    override suspend fun markAsUnFav(movie: Movie) {
+        db.markAsUnFavourite(movie)
     }
 
 }

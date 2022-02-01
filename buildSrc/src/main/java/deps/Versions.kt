@@ -17,10 +17,11 @@ object Versions {
     //test
     const val junitAndroid = "1.1.3"
     const val espressoAndroid = "3.4.0"
-    const val mockito = "1.10.19"
+    const val mockito = "4.0.0"
     const val roboElectric = "1.0.0"
     const val archTest = "2.1.0"
     const val truth = "1.1.2"
+    const val testCoroutine = "1.5.1"
 
     const val appCompat = "1.2.0"
     const val anko = "0.10.8"
