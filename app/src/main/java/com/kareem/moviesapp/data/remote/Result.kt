@@ -1,11 +1,22 @@
 package com.kareem.moviesapp.data.remote
 
-sealed class Result<out R> {
-    data class Success<out T>(val data: T) : Result<T>()
-    //data class Error(val exception: Exception) : Result<Nothing>()
-    data class Error(val th: Throwable) : Result<Nothing>()
-     class Loading<out T> : Result<T>()
-     class StopLoading<out T> : Result<T>()
+sealed class NetWorkState {
+    data class Success<out T>(val data: T) : NetWorkState()
+    data class Error(val th: Throwable) : NetWorkState()
+    object Idle : NetWorkState()
+    object Loading : NetWorkState()
+    object StopLoading: NetWorkState()
+
+
+}
+
+sealed class RoomState {
+    data class Success<out T>(val data: T) : RoomState()
+    data class Error(val th: Throwable) : RoomState()
+    object Empty : RoomState()
+    object Idle : RoomState()
+    object Loading : RoomState()
+    object StopLoading: RoomState()
 
 
 }

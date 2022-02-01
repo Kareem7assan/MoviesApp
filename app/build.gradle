@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+
 }
 
 android {
@@ -59,10 +60,13 @@ dependencies {
     //hilt
     implementation Deps.dagger_hilt.hilt
     kapt Deps.dagger_hilt.hilt_compiler
+
+
     //room
     implementation Deps.jetpack.room
     implementation Deps.jetpack.roomKtx
     kapt Deps.jetpack.compilerRoom
+
     //retrofit
     implementation Deps.retrofit.retrofit_lib
     implementation Deps.retrofit.gson
@@ -100,6 +104,7 @@ dependencies {
     implementation Deps.androidx.navigation.fragment
     implementation Deps.androidx.navigation.ui
 
+    testImplementation 'app.cash.turbine:turbine:0.7.0'
 
 
     testImplementation 'org.mockito:mockito-inline:2.21.0'

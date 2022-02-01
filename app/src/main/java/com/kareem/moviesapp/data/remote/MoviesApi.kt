@@ -1,7 +1,6 @@
 package com.kareem.moviesapp.data.remote
 
 import com.kareem.moviesapp.data.model.movies_model.MoviesModel
-import com.kareem.moviesapp.data.remote.Result
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import retrofit2.http.GET

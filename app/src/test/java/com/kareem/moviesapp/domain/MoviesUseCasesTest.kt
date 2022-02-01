@@ -128,7 +128,7 @@ class MoviesUseCasesTest {
         runBlockingTest {
             //arrange
             Mockito.`when`(fakeMoviesRepository.getMovies(1)).thenReturn(flow { emit(Response.error<MoviesModel>(401, errorResponseBody())) })
-            //assert
+            //assertx
             assertEquals(useCase.showAllMovies(1).firstOrNull(), null)
         }
     }

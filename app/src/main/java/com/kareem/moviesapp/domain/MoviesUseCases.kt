@@ -5,7 +5,7 @@ import com.kareem.moviesapp.data.repository.MoviesRepository
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class MoviesUseCases @Inject constructor(val repository: MoviesRepository) {
+class MoviesUseCases @Inject constructor(private val repository: MoviesRepository) {
 
   suspend fun showAllMovies(page:Int): Flow<List<Movie>> {
     return repository.getMovies(page)
