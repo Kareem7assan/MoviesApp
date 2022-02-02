@@ -14,6 +14,8 @@ object Versions {
     const val ktx = "1.3.2"
     const val ktxKotlin = "1.1.1"
     const val ktxFragment = "1.2.0"
+    const val custom_dialog="1.2.1"
+
     //test
     const val junitAndroid = "1.1.3"
     const val espressoAndroid = "3.4.0"

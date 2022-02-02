@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movies_nav_graph.xml"
+    app:startDestination="@id/moviesFragment"
+    >
+
+
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.kareem.moviesapp.presentation.home.HomeMoviesFragment"
+        android:label="Home"
+
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_moviesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favsFragment"
+        android:name="com.kareem.moviesapp.presentation.favourites.FavsMoviesFragment"
+        android:label="Favs"
+
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_moviesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.kareem.moviesapp.presentation.details.DetailsMovie"
+        android:label="Details"
+        tools:layout="@layout/fragment_details">
+
+    </fragment>
+    <action android:id="@+id/action_global_moviesFragment"
+        app:destination="@id/moviesFragment" />
+    <action android:id="@+id/action_global_favsFragment"
+        app:destination="@id/favsFragment"/>
+
+</navigation>

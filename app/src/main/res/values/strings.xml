@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+    <string name="home">Home</string>
+    <string name="favourite">My Best</string>
+    <string name="check_your_connection">check your connection</string>
 </resources>

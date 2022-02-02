@@ -57,6 +57,9 @@ dependencies {
     implementation Deps.androidx.constraintLayout
     implementation Deps.android.material
     implementation Deps.android.material
+    implementation Deps.design.customDialog
+    implementation Deps.glide
+
     //hilt
     implementation Deps.dagger_hilt.hilt
     kapt Deps.dagger_hilt.hilt_compiler
@@ -105,7 +108,9 @@ dependencies {
     implementation Deps.androidx.navigation.ui
 
     testImplementation 'app.cash.turbine:turbine:0.7.0'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    implementation 'com.airbnb.android:lottie:4.2.2'
 
     testImplementation 'org.mockito:mockito-inline:2.21.0'
 

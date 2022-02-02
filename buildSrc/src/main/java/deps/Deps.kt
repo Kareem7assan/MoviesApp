@@ -73,6 +73,11 @@ object Deps {
 
     }
 
+    object design {
+        const val customDialog="cc.cloudist.acplibrary:library:${Versions.custom_dialog}"
+
+    }
+
     object androidx {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
         const val core = "androidx.core:core-ktx:${Versions.androidxCore}"

@@ -7,19 +7,18 @@ import com.kareem.moviesapp.data.remote.NetWorkState
 import com.kareem.moviesapp.data.remote.RoomState
 import com.kareem.moviesapp.domain.MoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-open class HomeViewModel @Inject constructor(private val moviesUseCase:MoviesUseCases) : ViewModel(){
 
-    private val _moviesFlow= MutableStateFlow<NetWorkState>(NetWorkState.Idle)
-    private val _favFlow= MutableStateFlow<RoomState>(RoomState.Idle)
+@HiltViewModel
+open class HomeViewModel @Inject constructor(private val moviesUseCase: MoviesUseCases) : ViewModel(){
+
+    private val _moviesFlow= MutableStateFlow<NetWorkState>(NetWorkState.Loading)
+    private val _favFlow= MutableStateFlow<RoomState>(RoomState.Loading)
 
     val moviesFlow= _moviesFlow.asStateFlow()
     val favFlow= _favFlow.asStateFlow()
@@ -32,16 +31,17 @@ open class HomeViewModel @Inject constructor(private val moviesUseCase:MoviesUse
     }
 
     fun showHomeMovies(page: Int)  {
-        viewModelScope.launch(Job()+handler){
-            moviesUseCase.showAllMovies(page = page)
-                .onStart { _moviesFlow.value=NetWorkState.Loading }
-                .onCompletion { _moviesFlow.value=NetWorkState.StopLoading }
-               .collect { _moviesFlow.value=NetWorkState.Success(it) }
+        viewModelScope.launch(Job() + handler){
+                moviesUseCase.showAllMovies(page = page)
+                        .onStart { _moviesFlow.value=NetWorkState.Loading }
+                        .onCompletion { _moviesFlow.value=NetWorkState.StopLoading }
+                        .collect { _moviesFlow.value=NetWorkState.Success(it) }
+
         }
     }
 
     fun showMyFavouriteMovies()  {
-        viewModelScope.launch(Job()+handler){
+        viewModelScope.launch(Job() + handler){
             moviesUseCase.showFavouriteMovies()
                 .onStart { _favFlow.value=RoomState.Loading }
                 .onCompletion { _favFlow.value=RoomState.StopLoading }
@@ -51,7 +51,7 @@ open class HomeViewModel @Inject constructor(private val moviesUseCase:MoviesUse
         }
     }
 
-    fun changeFavourite(movie:Movie){
+    fun changeFavourite(movie: Movie){
         viewModelScope.launch {
             if (movie.hasFav == true) {
                 moviesUseCase.markAsUnFavourite(movie)
@@ -61,5 +61,7 @@ open class HomeViewModel @Inject constructor(private val moviesUseCase:MoviesUse
             }
         }
     }
+
+
 
 }

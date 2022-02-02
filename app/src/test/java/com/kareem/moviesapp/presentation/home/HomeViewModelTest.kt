@@ -63,9 +63,9 @@ class HomeViewModelTest {
 
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
-                    assert(awaitItem() is NetWorkState.Idle)
+                    
                     assert(awaitItem() is NetWorkState.Loading)
-                    assert(awaitItem() is NetWorkState.Success<*>)
+                    assert(awaitItem() is NetWorkState.Success)
                     assert(awaitItem() is NetWorkState.StopLoading)
             }
 
@@ -84,7 +84,7 @@ class HomeViewModelTest {
 
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
-                    assert(awaitItem() is NetWorkState.Idle)
+                    
                     assert(awaitItem() is NetWorkState.Loading)
                     assert(awaitItem() is NetWorkState.StopLoading)
                     assert(awaitItem() is NetWorkState.Error)
@@ -107,9 +107,9 @@ class HomeViewModelTest {
 
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
-                assert(awaitItem() is NetWorkState.Idle)
+                
                 assert(awaitItem() is NetWorkState.Loading)
-                assert(awaitItem() is NetWorkState.Success<*>)
+                assert(awaitItem() is NetWorkState.Success)
                 assert(awaitItem() is NetWorkState.StopLoading)
             }
 
@@ -127,9 +127,9 @@ class HomeViewModelTest {
 
             viewModel.favFlow.test {
                     viewModel.showMyFavouriteMovies()
-                assert(awaitItem() is RoomState.Idle)
+
                 assert(awaitItem() is RoomState.Loading)
-                assert(awaitItem() is RoomState.Success<*>)
+                assert(awaitItem() is RoomState.Success)
                 assert(awaitItem() is RoomState.StopLoading)
             }
 
@@ -145,7 +145,7 @@ class HomeViewModelTest {
 
             viewModel.favFlow.test {
                     viewModel.showMyFavouriteMovies()
-                assert(awaitItem() is RoomState.Idle)
+
                 assert(awaitItem() is RoomState.Loading)
                 assert(awaitItem() is RoomState.StopLoading)
                 assert(awaitItem() is RoomState.Empty)
