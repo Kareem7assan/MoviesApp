@@ -59,6 +59,8 @@ dependencies {
     implementation Deps.android.material
     implementation Deps.design.customDialog
     implementation Deps.glide
+    implementation Deps.design.lottie
+    implementation Deps.design.swipeRefresh
 
     //hilt
     implementation Deps.dagger_hilt.hilt
@@ -95,6 +97,8 @@ dependencies {
     testImplementation Deps.test.archTest
     testImplementation Deps.test.truthTest
     testImplementation Deps.test.testCoroutine
+    testImplementation Deps.test.turbine
+    testImplementation Deps.test.mockitoInline
     testImplementation Deps.jetpack.testRoom
 
     androidTestImplementation Deps.test.testRules
@@ -107,12 +111,8 @@ dependencies {
     implementation Deps.androidx.navigation.fragment
     implementation Deps.androidx.navigation.ui
 
-    testImplementation 'app.cash.turbine:turbine:0.7.0'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation 'com.airbnb.android:lottie:4.2.2'
 
-    testImplementation 'org.mockito:mockito-inline:2.21.0'
 
 
 }

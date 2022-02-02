@@ -44,6 +44,8 @@ object Deps {
 */
         const val archTest = "androidx.arch.core:core-testing:${Versions.archTest}"
         const val truthTest = "com.google.truth:truth:${Versions.truth}"
+        const val turbine = "app.cash.turbine:turbine:${Versions.turbine}"
+        const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockito_inline}"
 
         const val testCoroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.testCoroutine}"
 
@@ -75,6 +77,10 @@ object Deps {
 
     object design {
         const val customDialog="cc.cloudist.acplibrary:library:${Versions.custom_dialog}"
+        const val swipeRefresh="androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipe}"
+        const val lottie="com.airbnb.android:lottie:${Versions.lottie}"
+
+
 
     }
 

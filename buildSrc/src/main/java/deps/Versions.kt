@@ -15,6 +15,8 @@ object Versions {
     const val ktxKotlin = "1.1.1"
     const val ktxFragment = "1.2.0"
     const val custom_dialog="1.2.1"
+    const val lottie="4.2.2"
+    const val swipe="1.1.0"
 
     //test
     const val junitAndroid = "1.1.3"
@@ -23,6 +25,8 @@ object Versions {
     const val roboElectric = "1.0.0"
     const val archTest = "2.1.0"
     const val truth = "1.1.2"
+    const val turbine = "0.7.0"
+    const val mockito_inline = "2.21.0"
     const val testCoroutine = "1.5.1"
 
     const val appCompat = "1.2.0"
