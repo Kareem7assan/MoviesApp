@@ -69,9 +69,9 @@ class FavsMoviesFragment : Fragment()  {
     }
 
     private fun onItemFav(movie: Movie, pos: Int,size:Int) {
-        if (size==1) showEmpty()
         moviesAdapter.removeWithIndex(pos)
         homeViewModel.changeFavourite(movie)
+        if (size==1) showEmpty()
     }
 
     private fun observeMovies() {
@@ -102,10 +102,12 @@ class FavsMoviesFragment : Fragment()  {
 
     private fun showEmpty() {
         binding?.emptyLottie?.isVisible = true
+        binding?.rvMovies?.isVisible = false
     }
 
     private fun hideEmpty() {
         binding?.emptyLottie?.isVisible = false
+        binding?.rvMovies?.isVisible = true
     }
 
     private fun showData(data: List<Movie>) {
