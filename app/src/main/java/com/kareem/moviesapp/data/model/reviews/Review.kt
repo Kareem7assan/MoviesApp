@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "review")
+@Entity(tableName = "reviews")
 data class Review(
     var author: String? = null,
     @Ignore

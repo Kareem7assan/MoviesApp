@@ -1,6 +1,8 @@
 package com.kareem.moviesapp.data.cache
 import androidx.room.*
+import com.kareem.moviesapp.data.cache.relations.MovieWithReviews
 import com.kareem.moviesapp.data.model.movies_model.Movie
+import com.kareem.moviesapp.data.model.reviews.Review
 import kotlinx.coroutines.flow.Flow
 
 
@@ -17,5 +19,14 @@ interface MovieDao {
 
     @Update
     suspend fun markAsUnFavourite(movie:Movie)
+
+    @Transaction
+    @Query("SELECT * FROM reviews WHERE movie_id = :movieId")
+    fun getMovieReviews(movieId: Int): List<MovieWithReviews>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addReviews(reviews:List<Review>)
+
 
 }
