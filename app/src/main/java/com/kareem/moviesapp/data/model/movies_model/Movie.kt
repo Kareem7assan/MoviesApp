@@ -6,17 +6,16 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-
 @Entity(tableName = "movie")
 data class Movie(
+    @PrimaryKey(autoGenerate = false)
+    var id: Int? = null,
     @ColumnInfo(name = "adult")
     var adult: Boolean? = null,
     @ColumnInfo(name = "backdrop_path")
     var backdrop_path: String? = null,
     @Ignore
     var genre_ids: List<Int>? = null,
-    @PrimaryKey(autoGenerate = false)
-    var id: Int? = null,
     @ColumnInfo(name = "original_language")
     var original_language: String? = null,
     @ColumnInfo(name = "original_title")
