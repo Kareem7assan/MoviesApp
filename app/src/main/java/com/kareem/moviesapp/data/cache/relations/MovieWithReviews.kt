@@ -7,10 +7,7 @@ import com.kareem.moviesapp.data.model.reviews.Review
 
 data class MovieWithReviews (
     @Embedded val movie: Movie,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "movie_id"
-    )
-    val reviews:List<Review>
 
-        )
+    @Relation(parentColumn = "id", entityColumn = "movie_id")
+    val reviews:List<Review> = emptyList()
+)

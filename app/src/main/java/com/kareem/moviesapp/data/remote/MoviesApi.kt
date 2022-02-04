@@ -4,6 +4,7 @@ import com.kareem.moviesapp.data.model.movies_model.MoviesModel
 import com.kareem.moviesapp.data.model.reviews.ReviewsModel
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesApi {
@@ -16,6 +17,7 @@ interface MoviesApi {
 
     @GET("movie/{movie_id}/reviews")
     suspend fun getReviews(
+        @Path("movie_id") movieId:String,
         @Query("page") page:Int=1,
         @Query("language") language:String="en-US",
         @Query("api_key") apiKey:String="e7c8c79bac155e8f4a21476bfe58c90e"

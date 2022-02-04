@@ -8,12 +8,14 @@ import com.google.common.truth.Truth.assertThat
 import com.kareem.moviesapp.data.cache.MovieDB
 import com.kareem.moviesapp.data.cache.MovieDao
 import com.kareem.moviesapp.data.model.movies_model.Movie
+import com.kareem.moviesapp.data.model.reviews.Review
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import java.util.concurrent.Executors
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MovieDbTest {
@@ -22,14 +24,18 @@ class MovieDbTest {
 
     @Before
     fun setUp() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-                context, MovieDB::class.java).build()
-        movieDao = db.movieDao()
+        runBlocking {
+            val context = ApplicationProvider.getApplicationContext<Context>()
+            db = Room.inMemoryDatabaseBuilder(
+                context, MovieDB::class.java)
+                .setTransactionExecutor(Executors.newSingleThreadExecutor()) // <-- this makes all the difference
+                .build()
+            movieDao = db.movieDao()
+
+        }
     }
 
     @After
-    @Throws(IOException::class)
     fun closeDb() {
         db.close()
     }
@@ -91,6 +97,31 @@ class MovieDbTest {
             movieDao.markAsUnFavourite(favMovie)
             //ensure that the marked movie has been updated within the movie list
             assert(movieDao.getAllMovies().find { it.id== favMovie.id}?.hasFav==false)
+
+        }
+    }
+
+
+    @Test
+    fun getReviewsById(){
+        runBlocking {
+
+            val movies =
+                listOf(
+                    Movie(id = 1, title = "spider man", hasFav = true),
+                    Movie(id = 2, title = "matrix", hasFav = false),
+                    Movie(id = 3, title = "avatar", hasFav = false),
+                    Movie(id = 4, title = "hulk", hasFav = false),
+                )
+            val reviews =
+                listOf(
+                    Review(id = "1000",movie_id = 1),
+                    Review(id = "1100",movie_id = 1),
+                    Review(id = "1200",movie_id = 1)
+                )
+            movieDao.addMovies(movies)
+            movieDao.addReviews(reviews)
+            assertThat(movieDao.getMovieReviews(1).first().reviews.first()).isEqualTo(Review(id = "1000",movie_id = 1))
 
         }
     }

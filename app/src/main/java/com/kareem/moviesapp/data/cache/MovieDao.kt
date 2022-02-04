@@ -21,8 +21,8 @@ interface MovieDao {
     suspend fun markAsUnFavourite(movie:Movie)
 
     @Transaction
-    @Query("SELECT * FROM reviews WHERE movie_id = :movieId")
-    fun getMovieReviews(movieId: Int): List<MovieWithReviews>
+    @Query("SELECT * FROM movie WHERE id =:movieId ")
+    suspend fun getMovieReviews(movieId:Int): List<MovieWithReviews>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
