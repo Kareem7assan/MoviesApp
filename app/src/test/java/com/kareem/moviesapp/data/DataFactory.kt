@@ -2,6 +2,8 @@ package com.kareem.moviesapp.data
 
 import com.kareem.moviesapp.data.model.movies_model.Movie
 import com.kareem.moviesapp.data.model.movies_model.MoviesModel
+import com.kareem.moviesapp.data.model.reviews.Review
+import com.kareem.moviesapp.data.model.reviews.ReviewsModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -23,7 +25,7 @@ val favsMockedList=
 
                 )
 
-val     moviesDbMockedList=
+val moviesDbMockedList=
         listOf(
                 Movie(id = 3, title = "avatar", hasFav = true),
                 Movie(id = 5, title = "batman", hasFav = true),
@@ -33,6 +35,16 @@ val     moviesDbMockedList=
 
 val moviesMockResponse=MoviesModel(page = 1,results = moviesMockedList)
 val emptyMoviesMockResponse=MoviesModel(page = 1,results = emptyList())
+
+val reviewsMockedList=
+        listOf(
+               Review(id = "1000", movie_id = 2),
+               Review(id = "1100", movie_id = 2),
+                Review(id = "1300", movie_id = 2)
+        )
+
+val reviewsMockResponse=ReviewsModel(page = 1,results = reviewsMockedList)
+val emptyReviewsMockResponse=MoviesModel(page = 1,results = emptyList())
 
 
 fun errorResponseBody(): ResponseBody {

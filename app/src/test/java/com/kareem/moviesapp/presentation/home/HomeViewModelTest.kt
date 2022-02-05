@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.kareem.moviesapp.data.model.movies_model.Movie
 import com.kareem.moviesapp.data.moviesMockedList
-import com.kareem.moviesapp.data.remote.NetWorkState
-import com.kareem.moviesapp.data.remote.RoomState
+import com.kareem.moviesapp.data.remote.NetWorkMovieState
+import com.kareem.moviesapp.data.remote.RoomMoviesState
 import com.kareem.moviesapp.domain.MoviesUseCases
 import com.kareem.moviesapp.presentation.rules.MainCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -64,10 +64,11 @@ class HomeViewModelTest {
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
                     
-                    assert(awaitItem() is NetWorkState.Loading)
-                    assert(awaitItem() is NetWorkState.Success)
-                    assert(awaitItem() is NetWorkState.StopLoading)
+                    assert(awaitItem() is NetWorkMovieState.Loading)
+                    assert(awaitItem() is NetWorkMovieState.Success)
+                    assert(awaitItem() is NetWorkMovieState.StopLoading)
             }
+
 
 
         }
@@ -85,9 +86,9 @@ class HomeViewModelTest {
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
                     
-                    assert(awaitItem() is NetWorkState.Loading)
-                    assert(awaitItem() is NetWorkState.StopLoading)
-                    assert(awaitItem() is NetWorkState.Error)
+                    assert(awaitItem() is NetWorkMovieState.Loading)
+                    assert(awaitItem() is NetWorkMovieState.StopLoading)
+                    assert(awaitItem() is NetWorkMovieState.Error)
             }
 
 
@@ -108,9 +109,9 @@ class HomeViewModelTest {
             viewModel.moviesFlow.test {
                     viewModel.showHomeMovies(1)
                 
-                assert(awaitItem() is NetWorkState.Loading)
-                assert(awaitItem() is NetWorkState.Success)
-                assert(awaitItem() is NetWorkState.StopLoading)
+                assert(awaitItem() is NetWorkMovieState.Loading)
+                assert(awaitItem() is NetWorkMovieState.Success)
+                assert(awaitItem() is NetWorkMovieState.StopLoading)
             }
 
         }
@@ -128,9 +129,9 @@ class HomeViewModelTest {
             viewModel.favFlow.test {
                     viewModel.showMyFavouriteMovies()
 
-                assert(awaitItem() is RoomState.Loading)
-                assert(awaitItem() is RoomState.Success)
-                assert(awaitItem() is RoomState.StopLoading)
+                assert(awaitItem() is RoomMoviesState.Loading)
+                assert(awaitItem() is RoomMoviesState.Success)
+                assert(awaitItem() is RoomMoviesState.StopLoading)
             }
 
         }
@@ -146,9 +147,9 @@ class HomeViewModelTest {
             viewModel.favFlow.test {
                     viewModel.showMyFavouriteMovies()
 
-                assert(awaitItem() is RoomState.Loading)
-                assert(awaitItem() is RoomState.StopLoading)
-                assert(awaitItem() is RoomState.Empty)
+                assert(awaitItem() is RoomMoviesState.Loading)
+                assert(awaitItem() is RoomMoviesState.StopLoading)
+                assert(awaitItem() is RoomMoviesState.Empty)
             }
 
         }

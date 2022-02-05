@@ -38,7 +38,7 @@ class MoviesUseCasesTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         useCase = MoviesUseCases(repository = fakeMoviesRepository)
     }
 
@@ -128,14 +128,14 @@ class MoviesUseCasesTest {
         runBlockingTest {
             //arrange
             Mockito.`when`(fakeMoviesRepository.getMovies(1)).thenReturn(flow { emit(Response.error<MoviesModel>(401, errorResponseBody())) })
-            //assertx
+            //assert
             assertEquals(useCase.showAllMovies(1).firstOrNull(), null)
         }
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `showAllMovies() when page has error return then getMovies() invoked once`() {
+    fun `showAllMovies() when page has error response return then getMovies() invoked once`() {
         runBlockingTest {
             //arrange
             Mockito.`when`(fakeMoviesRepository.getMovies(1)).thenReturn(flow { emit(Response.error<MoviesModel>(401, errorResponseBody())) })
@@ -192,4 +192,5 @@ class MoviesUseCasesTest {
 
         }
     }
+
 }

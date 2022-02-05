@@ -1,6 +1,7 @@
 package com.kareem.moviesapp.di
 
 import com.kareem.moviesapp.data.repository.MoviesRepository
+import com.kareem.moviesapp.domain.DetailsUseCases
 import com.kareem.moviesapp.domain.MoviesUseCases
 import dagger.Module
 import dagger.Provides
@@ -13,6 +14,11 @@ object UseCaseModule {
     @Provides
     fun providesMoviesUseCase(moviesRepository: MoviesRepository): MoviesUseCases {
         return MoviesUseCases(moviesRepository)
+    }
+
+    @Provides
+    fun providesMovieDetailsUseCase(moviesRepository: MoviesRepository): DetailsUseCases {
+        return DetailsUseCases(moviesRepository)
     }
 
 }

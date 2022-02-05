@@ -2,7 +2,6 @@ package com.kareem.moviesapp.presentation.home
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +13,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
 import com.kareem.moviesapp.R
 import com.kareem.moviesapp.data.model.movies_model.Movie
-import com.kareem.moviesapp.data.remote.NetWorkState
+import com.kareem.moviesapp.data.remote.NetWorkMovieState
 import com.kareem.moviesapp.databinding.FragmentHomeBinding
 import com.kareem.moviesapp.presentation.home.adapter.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.support.v4.toast
 
@@ -94,16 +91,16 @@ class HomeMoviesFragment : Fragment()  {
                 homeViewModel.moviesFlow.collect { state ->
 
                     when (state) {
-                        is NetWorkState.Loading -> {
+                        is NetWorkMovieState.Loading -> {
                             if (pageNumber==1) showProgressDialog()
                         }
-                        is NetWorkState.StopLoading -> {
+                        is NetWorkMovieState.StopLoading -> {
                             hideProgressDialog()
                         }
-                        is NetWorkState.Error -> {
+                        is NetWorkMovieState.Error -> {
                             toast(getString(R.string.check_your_connection))
                         }
-                        is NetWorkState.Success -> {
+                        is NetWorkMovieState.Success -> {
                             showData(state.data)
                         }
                     }

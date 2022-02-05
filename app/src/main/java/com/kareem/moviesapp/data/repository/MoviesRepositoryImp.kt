@@ -3,6 +3,9 @@ package com.kareem.moviesapp.data.repository
 import com.kareem.moviesapp.data.cache.MovieDao
 import com.kareem.moviesapp.data.model.movies_model.Movie
 import com.kareem.moviesapp.data.model.movies_model.MoviesModel
+import com.kareem.moviesapp.data.model.rate.BaseRateModel
+import com.kareem.moviesapp.data.model.reviews.Review
+import com.kareem.moviesapp.data.model.reviews.ReviewsModel
 import com.kareem.moviesapp.data.remote.MoviesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -32,6 +35,22 @@ class MoviesRepositoryImp @Inject constructor(
 
     override suspend fun markAsUnFav(movie: Movie) {
         db.markAsUnFavourite(movie)
+    }
+
+    override suspend fun getReviews(movieId: Int,page: Int): Flow<Response<ReviewsModel>> {
+        return flow { emit(api.getReviews(movieId,page)) }
+    }
+
+    override suspend fun saveReviews(reviews: List<Review>) {
+        return db.addReviews(reviews)
+    }
+
+    override suspend fun getReviewsCache(movieId: Int): List<Review> {
+        return db.getMovieReviews(movieId).first().reviews
+    }
+
+    override suspend fun addRate(movieId: Int, rate: String): Response<BaseRateModel> {
+        return api.addRate(movieId, rate)
     }
 
 }

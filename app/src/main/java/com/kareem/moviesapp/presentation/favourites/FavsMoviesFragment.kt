@@ -14,21 +14,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
 import cc.cloudist.acplibrary.ACProgressConstant
 import cc.cloudist.acplibrary.ACProgressFlower
-import com.google.android.material.snackbar.Snackbar
 import com.kareem.moviesapp.R
 import com.kareem.moviesapp.data.model.movies_model.Movie
-import com.kareem.moviesapp.data.remote.NetWorkState
-import com.kareem.moviesapp.data.remote.RoomState
+import com.kareem.moviesapp.data.remote.RoomMoviesState
 import com.kareem.moviesapp.databinding.FragmentHomeBinding
 import com.kareem.moviesapp.presentation.home.HomeViewModel
 import com.kareem.moviesapp.presentation.home.adapter.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.support.v4.toast
 
 
 @AndroidEntryPoint
@@ -80,17 +76,17 @@ class FavsMoviesFragment : Fragment()  {
                 homeViewModel.favFlow.collect { state ->
 
                     when (state) {
-                        is RoomState.Loading -> {
+                        is RoomMoviesState.Loading -> {
                             hideEmpty()
                             showProgressDialog()
                         }
-                        is RoomState.StopLoading -> {
+                        is RoomMoviesState.StopLoading -> {
                             hideProgressDialog()
                         }
-                        is RoomState.Empty->{
+                        is RoomMoviesState.Empty->{
                             showEmpty()
                         }
-                        is RoomState.Success -> {
+                        is RoomMoviesState.Success -> {
                             hideEmpty()
                             showData(state.data)
                         }

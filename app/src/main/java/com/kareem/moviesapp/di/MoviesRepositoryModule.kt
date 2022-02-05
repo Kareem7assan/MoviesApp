@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class MoviesRepositoryModule {
     @Binds
-    abstract fun providesTestRepo(moviesRepository: MoviesRepositoryImp): MoviesRepository
+    abstract fun providesMovieRepo(moviesRepository: MoviesRepositoryImp): MoviesRepository
 
 }

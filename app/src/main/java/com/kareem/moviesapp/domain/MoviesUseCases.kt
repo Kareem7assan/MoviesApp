@@ -10,9 +10,8 @@ class MoviesUseCases @Inject constructor(private val repository: MoviesRepositor
 
   suspend fun showAllMovies(page:Int): Flow<List<Movie>> {
     return repository.getMovies(page)
-            .transform {if (it.body()?.results?.isNotEmpty()==true) emit(handleWithFavsItems(it.body()?.results!!)) }
+            .transform {if (it.isSuccessful && it.body()?.results?.isNullOrEmpty()?.not()==true) emit(handleWithFavsItems(it.body()?.results!!)) }
             .onEach { repository.saveMovies(it) }
-
             .onEmpty { emit(repository.getMoviesCache()) }
             .catch { emit(repository.getMoviesCache()) }
   }
