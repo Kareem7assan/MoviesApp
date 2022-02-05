@@ -14,7 +14,7 @@ interface MoviesApi {
         @Query("api_key") apiKey:String="e7c8c79bac155e8f4a21476bfe58c90e"
     ): Response<MoviesModel>
 
-    @GET("movie/{movie_id}/reviews")
+    @GET("{movie_id}/reviews")
     suspend fun getReviews(
         @Path("movie_id") movieId:Int,
         @Query("page") page:Int=1,
@@ -24,7 +24,7 @@ interface MoviesApi {
 
 
     @FormUrlEncoded
-    @POST("movie/{movie_id}/rating")
+    @POST("{movie_id}/rating")
     suspend fun addRate(
         @Path("movie_id") movieId:Int,
         @Field("value") rate:String,

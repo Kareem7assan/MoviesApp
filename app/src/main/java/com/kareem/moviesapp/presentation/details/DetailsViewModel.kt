@@ -1,11 +1,14 @@
 package com.kareem.moviesapp.presentation.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kareem.moviesapp.data.model.movies_model.Movie
 import com.kareem.moviesapp.data.remote.NetWorkReviewsState
 import com.kareem.moviesapp.data.remote.RoomMovieState
 import com.kareem.moviesapp.data.remote.RoomMoviesState
 import com.kareem.moviesapp.domain.DetailsUseCases
+import com.kareem.moviesapp.domain.MoviesUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
@@ -15,7 +18,10 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-open class DetailsViewModel @Inject constructor(private val detailsUseCase: DetailsUseCases) : ViewModel(){
+open class DetailsViewModel @Inject constructor(
+        private val detailsUseCase: DetailsUseCases,
+        private val moviesUseCase:MoviesUseCases
+        ) : ViewModel(){
 
     private val _reviewsFlow= MutableStateFlow<NetWorkReviewsState>(NetWorkReviewsState.Loading)
     private val _detailsFlow= MutableStateFlow<RoomMovieState>(RoomMovieState.Loading)
@@ -25,6 +31,7 @@ open class DetailsViewModel @Inject constructor(private val detailsUseCase: Deta
 
 
     private val handler= CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e("error",throwable.toString())
         _reviewsFlow.value=NetWorkReviewsState.Error(throwable)
         _detailsFlow.value=RoomMovieState.Error(throwable)
 
@@ -35,8 +42,9 @@ open class DetailsViewModel @Inject constructor(private val detailsUseCase: Deta
             detailsUseCase.getReviews(movieId = movieId,page = page)
                         .onStart { _reviewsFlow.value=NetWorkReviewsState.Loading }
                         .onCompletion { _reviewsFlow.value=NetWorkReviewsState.StopLoading }
-                            .catch {  _reviewsFlow.value=NetWorkReviewsState.Error(it) }
-                    .collect { _reviewsFlow.value=NetWorkReviewsState.Success(it) }
+                        .catch {  _reviewsFlow.value=NetWorkReviewsState.Error(it) }
+                        .onEmpty { _reviewsFlow.value=NetWorkReviewsState.Empty }
+                        .collect { _reviewsFlow.value=NetWorkReviewsState.Success(it) }
 
         }
     }
@@ -58,7 +66,16 @@ open class DetailsViewModel @Inject constructor(private val detailsUseCase: Deta
     }
 
 
+    fun changeFavourite(movie: Movie){
+        viewModelScope.launch(Job() + handler) {
+            if (movie.hasFav == true) {
+                moviesUseCase.markAsUnFavourite(movie)
+            } else {
+                moviesUseCase.markAsFavourite(movie)
 
+            }
+        }
+    }
 
 
 }

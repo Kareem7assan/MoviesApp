@@ -1,5 +1,6 @@
 package com.kareem.moviesapp.presentation.home.adapter
 
+import android.text.Html
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -65,7 +66,12 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieVH>() {
             else{
                 ivLike.setImageResource(R.drawable.ic_baseline_not_favorite_24)
             }
-            tvMovie.text=item.title
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                tvMovie.text= Html.fromHtml(item.title,Html.FROM_HTML_MODE_LEGACY)
+            }
+            else{
+                tvMovie.text= Html.fromHtml(item.title)
+            }
             Glide.with(itemView.context)
                     .load(Img_Suffix+""+item.poster_path)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)

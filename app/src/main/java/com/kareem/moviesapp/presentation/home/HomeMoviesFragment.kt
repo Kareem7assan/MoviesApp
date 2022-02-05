@@ -29,7 +29,7 @@ import org.jetbrains.anko.support.v4.toast
 
 @AndroidEntryPoint
 class HomeMoviesFragment : Fragment()  {
-    private val VISIBLE_THRESHOLD: Int=1
+    private val visibleThreshold: Int=1
     private val moviesAdapter by lazy { MovieAdapter() }
     private  lateinit var  layManger: GridLayoutManager
     private var binding: FragmentHomeBinding? = null
@@ -75,7 +75,7 @@ class HomeMoviesFragment : Fragment()  {
                 bundleOf(
                         "movie"
                           to
-                        movie
+                        movie.id
                 )
                 )
     }
@@ -89,7 +89,6 @@ class HomeMoviesFragment : Fragment()  {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.moviesFlow.collect { state ->
-
                     when (state) {
                         is NetWorkMovieState.Loading -> {
                             if (pageNumber==1) showProgressDialog()
@@ -115,7 +114,7 @@ class HomeMoviesFragment : Fragment()  {
                 super.onScrolled(recyclerView, dx, dy)
                 val totalItemCount = layManger.itemCount
                 val lastVisibleItem = layManger.findLastVisibleItemPosition()
-                if ( dy > 0 && totalItemCount <= lastVisibleItem + VISIBLE_THRESHOLD) {
+                if ( dy > 0 && totalItemCount <= lastVisibleItem + visibleThreshold) {
                     pageNumber++
                     homeViewModel.showHomeMovies(pageNumber)
 

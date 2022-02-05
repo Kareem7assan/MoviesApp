@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.kareem.moviesapp.presentation.details.DetailsMovie"
+        android:name="com.kareem.moviesapp.presentation.details.MovieDetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_details">
 

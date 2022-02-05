@@ -1,5 +1,6 @@
 package com.kareem.moviesapp.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kareem.moviesapp.data.model.movies_model.Movie
@@ -25,6 +26,7 @@ open class HomeViewModel @Inject constructor(private val moviesUseCase: MoviesUs
 
 
     private val handler= CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e("error",throwable.message+",")
         _moviesFlow.value=NetWorkMovieState.Error(throwable)
         _favFlow.value=RoomMoviesState.Empty
 

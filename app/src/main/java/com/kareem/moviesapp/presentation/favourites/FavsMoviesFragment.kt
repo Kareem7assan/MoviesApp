@@ -115,7 +115,7 @@ class FavsMoviesFragment : Fragment()  {
                 bundleOf(
                         "movie"
                                 to
-                                movie
+                                movie.id
                 )
         )
     }

@@ -3,4 +3,8 @@
     <string name="home">Home</string>
     <string name="favourite">My Best</string>
     <string name="check_your_connection">check your connection</string>
+    <string name="description">Description</string>
+    <string name="release_date">Release date</string>
+    <string name="reviews">Reviews</string>
+    <string name="vote">vote</string>
 </resources>

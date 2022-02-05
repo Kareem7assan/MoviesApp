@@ -1,6 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:layout_weight="1"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardIv"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <ImageView
+                android:id="@+id/ivMovie"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/movie_img"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:minHeight="80dp"
+                android:background="#50000000"
+                android:layout_gravity="bottom|end"
+                >
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tvAvgRating"
+                    app:layout_constraintTop_toTopOf="@id/tvAvgRating"
+                    android:rating="0"
+                    android:progressBackgroundTint="@color/white"
+                    android:progressTint="@color/pink"
+                    android:layout_gravity="center"
+                    style="?android:attr/ratingBarStyleSmall"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="squad team"
+                    android:layout_marginEnd="4dp"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="8dp"
+                    android:id="@+id/tvTitle"
+                    app:layout_constraintEnd_toStartOf="@+id/tvAvgRating"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintBottom_toBottomOf="@id/tvVotesAvg"
+                    app:layout_constraintTop_toTopOf="@id/tvAvgRating"
+
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="4.6"
+                    android:layout_marginEnd="4dp"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:id="@+id/tvAvgRating"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/ratingBar"
+                    app:layout_constraintBottom_toTopOf="@id/tvVotesAvg"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text=" 800 vote"
+                    android:padding="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/tvAvgRating"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintBottom_toTopOf="@id/tvPopularity"
+                    android:id="@+id/tvVotesAvg"
+                    />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="456423.436"
+                    android:padding="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/tvVotesAvg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/tvPopularity"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_baseline_favorite_24"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <TextView
+        android:id="@+id/tvDescriptionHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textSize="16sp"
+        android:text="@string/description"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/cardIv"
+        android:gravity="start"
+        />
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDescriptionHint"
+        tools:text="Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man"
+        android:gravity="start"
+        />
+    <TextView
+        android:id="@+id/tvReleaseDateHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textSize="16sp"
+        android:text="@string/release_date"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        android:gravity="start"
+        />
+    <TextView
+        android:id="@+id/tvReleaseDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvReleaseDateHint"
+        tools:text="23-12-2022"
+        android:gravity="start"
+        />
+
+        <TextView
+            android:id="@+id/tvReviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:textSize="16sp"
+            android:text="@string/reviews"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/tvReleaseDate"
+            android:gravity="start"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvReviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            tools:listitem="@layout/item_review"
+            app:layout_constraintTop_toBottomOf="@+id/tvReviews"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

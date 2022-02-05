@@ -22,6 +22,7 @@ sealed class RoomMoviesState {
 sealed class NetWorkReviewsState {
     data class Success(val data: List<Review>) : NetWorkReviewsState()
     data class Error(val th: Throwable) : NetWorkReviewsState()
+    object Empty : NetWorkReviewsState()
     object Loading : NetWorkReviewsState()
     object StopLoading: NetWorkReviewsState()
 

@@ -19,7 +19,7 @@ class DetailsUseCases @Inject constructor(private val repository: MoviesReposito
     return repository.getReviews(movieId, page)
             .transform {if (it.isSuccessful && it.body()?.results?.isNullOrEmpty()?.not()==true) emit(it.body()?.results!!) }
             .onEach { repository.saveReviews(it) }
-            .onEmpty { emit(repository.getReviewsCache(movieId)) }
+            .onEmpty {if (repository.getReviewsCache(movieId).isNotEmpty()) emit(repository.getReviewsCache(movieId)) }
 
   }
 
