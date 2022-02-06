@@ -88,6 +88,8 @@ class DetailsUseCasesTest{
         runBlockingTest {
             //arrange
             Mockito.`when`(fakeMoviesRepository.getReviews(1,1)).thenReturn(flow { emit(Response.error<ReviewsModel>(401, errorResponseBody())) })
+            Mockito.`when`(fakeMoviesRepository.getReviewsCache(1)).thenReturn(emptyList())
+
             //assert
             assertEquals(useCase.getReviews(1,1).firstOrNull(), null)
         }
@@ -103,7 +105,7 @@ class DetailsUseCasesTest{
             //act
             useCase.getReviews(1,1).first()
             //assert
-            Mockito.verify(fakeMoviesRepository, Mockito.times(1)).getReviewsCache(1)
+            Mockito.verify(fakeMoviesRepository, Mockito.times(2)).getReviewsCache(1)
         }
     }
 

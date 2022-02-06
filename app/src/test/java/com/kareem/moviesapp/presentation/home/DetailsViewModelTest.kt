@@ -47,14 +47,16 @@ class DetailsViewModelTest {
     private lateinit var fakeUseCases: DetailsUseCases
 
 
+    @Mock
+    private lateinit var fakeUseCasesMovies: MoviesUseCases
+
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
 
         coroutineDispatcher = TestCoroutineDispatcher()
-        viewModel = DetailsViewModel(fakeUseCases)
-
+        viewModel = DetailsViewModel(fakeUseCases,fakeUseCasesMovies)
     }
 
 
@@ -90,6 +92,7 @@ class DetailsViewModelTest {
                 assert(awaitItem() is NetWorkReviewsState.Loading)
                 assert(awaitItem() is NetWorkReviewsState.StopLoading)
                 assert(awaitItem() is NetWorkReviewsState.Error)
+                assert(awaitItem() is NetWorkReviewsState.Empty)
             }
 
 

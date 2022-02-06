@@ -21,6 +21,7 @@ class DetailsUseCases @Inject constructor(private val repository: MoviesReposito
             .onEach { repository.saveReviews(it) }
             .onEmpty {if (repository.getReviewsCache(movieId).isNotEmpty()) emit(repository.getReviewsCache(movieId)) }
 
+
   }
 
 

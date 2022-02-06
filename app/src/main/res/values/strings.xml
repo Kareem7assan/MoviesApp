@@ -7,4 +7,6 @@
     <string name="release_date">Release date</string>
     <string name="reviews">Reviews</string>
     <string name="vote">vote</string>
+    <string name="add_rate">Rate</string>
+    <string name="success_rate">your rate added successfully</string>
 </resources>

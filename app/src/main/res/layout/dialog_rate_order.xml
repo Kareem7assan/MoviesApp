@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/round_up_rectangle"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="12sp"
+
+        />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1"
+        android:isIndicator="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tvAvgRating"
+        app:layout_constraintTop_toTopOf="@id/tvAvgRating"
+        android:rating="0"
+        android:layout_marginTop="8dp"
+        android:progressTint="@color/pink"
+        android:layout_gravity="center"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRateOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="17.5sp"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="23dp"
+        android:layout_marginStart="23dp"
+        android:enabled="false"
+        android:alpha="0.5"
+        app:cornerRadius="30dp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/pink"
+        android:text="@string/add_rate"
+        />
+
+</LinearLayout>

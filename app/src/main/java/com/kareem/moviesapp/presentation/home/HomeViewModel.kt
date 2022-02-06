@@ -26,7 +26,6 @@ open class HomeViewModel @Inject constructor(private val moviesUseCase: MoviesUs
 
 
     private val handler= CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("error",throwable.message+",")
         _moviesFlow.value=NetWorkMovieState.Error(throwable)
         _favFlow.value=RoomMoviesState.Empty
 

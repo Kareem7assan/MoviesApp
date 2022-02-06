@@ -53,6 +53,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/tvAvgRating"
                     app:layout_constraintTop_toTopOf="@id/tvAvgRating"
                     android:rating="0"
+                    android:isIndicator="true"
                     android:progressBackgroundTint="@color/white"
                     android:progressTint="@color/pink"
                     android:layout_gravity="center"

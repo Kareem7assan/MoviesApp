@@ -1,9 +1,11 @@
 package com.kareem.moviesapp.presentation.details
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -23,10 +25,12 @@ import com.kareem.moviesapp.R
 import com.kareem.moviesapp.app.App
 import com.kareem.moviesapp.data.model.movies_model.Movie
 import com.kareem.moviesapp.data.model.reviews.Review
+import com.kareem.moviesapp.data.remote.NetWorkRateState
 import com.kareem.moviesapp.data.remote.NetWorkReviewsState
 import com.kareem.moviesapp.data.remote.RoomMovieState
 import com.kareem.moviesapp.databinding.FragmentDetailsBinding
 import com.kareem.moviesapp.presentation.details.adapter.ReviewsAdapter
+import com.kareem.moviesapp.presentation.details.rate.RateDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,6 +39,7 @@ import org.jetbrains.anko.support.v4.toast
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment()  {
+    private  var dialog: RateDialog?=null
     private var movieId: Int = 0
     private val reviewsAdapter by lazy { ReviewsAdapter() }
     private  lateinit var  layManger: LinearLayoutManager
@@ -59,7 +64,7 @@ class MovieDetailsFragment : Fragment()  {
         setupActions()
         sendRequestReviews(movieId)
         getMovieDetails(movieId)
-        observeReviews()
+        observeFlows()
 
     }
 
@@ -98,7 +103,7 @@ class MovieDetailsFragment : Fragment()  {
         }
     }
 
-    private fun observeReviews() {
+    private fun observeFlows() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 detailsViewModel.reviewsFlow.collect { state ->
@@ -141,9 +146,33 @@ class MovieDetailsFragment : Fragment()  {
             }
         }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                detailsViewModel.rateFlow.collect { state ->
+
+                    when (state) {
+                        is NetWorkRateState.Loading -> {
+                            if (pageNumber == 1) showProgressDialog()
+                        }
+                        is NetWorkRateState.StopLoading -> {
+                            hideProgressDialog()
+                        }
+                        is NetWorkRateState.Error -> {
+                            toast(getString(R.string.check_your_connection))
+                        }
+
+                        is NetWorkRateState.Success -> {
+                            dialog?.dismiss().also { toast(getString(R.string.success_rate)) }
+                        }
+                    }
+                }
+            }
+        }
+
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun showDetails(movie: Movie) {
         with(binding!!){
             changeFaveMovieDisplay(movie.hasFav ?: false)
@@ -161,9 +190,22 @@ class MovieDetailsFragment : Fragment()  {
             if (movie.popularity ?: 0.0 > 0) tvPopularity.text=(movie.popularity ?: 0.0).toString()
             tvDescription.text=movie.overview ?: ""
             tvReleaseDate.text=movie.release_date ?: ""
-            binding?.ivLike?.setOnClickListener {
+            ivLike.setOnClickListener {
                 detailsViewModel.changeFavourite(movie).also { changeFaveMovieDisplay(!movie.hasFav!!) }
             }
+
+            ratingBar.setOnTouchListener { view, motionEvent ->
+                if (motionEvent.action == MotionEvent.ACTION_UP) {
+                    dialog=RateDialog(movie){rate->
+                        detailsViewModel.addRate(movieId,rate.toString())
+                    }
+                    dialog?.show(requireActivity().supportFragmentManager,RateDialog.TAG)
+                }
+                return@setOnTouchListener true
+
+            }
+
+
         }
     }
 

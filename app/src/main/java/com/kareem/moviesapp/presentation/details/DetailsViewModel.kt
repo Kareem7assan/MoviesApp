@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kareem.moviesapp.data.model.movies_model.Movie
+import com.kareem.moviesapp.data.remote.NetWorkRateState
 import com.kareem.moviesapp.data.remote.NetWorkReviewsState
 import com.kareem.moviesapp.data.remote.RoomMovieState
 import com.kareem.moviesapp.data.remote.RoomMoviesState
@@ -24,16 +25,18 @@ open class DetailsViewModel @Inject constructor(
         ) : ViewModel(){
 
     private val _reviewsFlow= MutableStateFlow<NetWorkReviewsState>(NetWorkReviewsState.Loading)
+    private val _rateFlow= MutableStateFlow<NetWorkRateState>(NetWorkRateState.StopLoading)
     private val _detailsFlow= MutableStateFlow<RoomMovieState>(RoomMovieState.Loading)
 
     val reviewsFlow= _reviewsFlow.asStateFlow()
+    val rateFlow= _rateFlow.asStateFlow()
     val detailsFlow= _detailsFlow.asStateFlow()
 
 
     private val handler= CoroutineExceptionHandler { coroutineContext, throwable ->
-        Log.e("error",throwable.toString())
         _reviewsFlow.value=NetWorkReviewsState.Error(throwable)
         _detailsFlow.value=RoomMovieState.Error(throwable)
+        _rateFlow.value=NetWorkRateState.Error(throwable)
 
     }
 
@@ -61,7 +64,11 @@ open class DetailsViewModel @Inject constructor(
 
     fun addRate(movieId: Int,rate:String){
         viewModelScope.launch(Job() + handler){
-            detailsUseCase.addRate(movieId, rate)
+            _rateFlow.value=NetWorkRateState.Loading
+            _rateFlow.value=NetWorkRateState.Success(detailsUseCase.addRate(movieId, rate).body()!!)
+            _rateFlow.value=NetWorkRateState.StopLoading
+
+
         }
     }
 

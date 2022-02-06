@@ -1,6 +1,7 @@
 package com.kareem.moviesapp.data.remote
 
 import com.kareem.moviesapp.data.model.movies_model.Movie
+import com.kareem.moviesapp.data.model.rate.BaseRateModel
 import com.kareem.moviesapp.data.model.reviews.Review
 
 sealed class NetWorkMovieState {
@@ -28,6 +29,14 @@ sealed class NetWorkReviewsState {
 
 }
 
+sealed class NetWorkRateState {
+    data class Success(val data: BaseRateModel) : NetWorkRateState()
+    data class Error(val th: Throwable) : NetWorkRateState()
+    object Loading : NetWorkRateState()
+    object StopLoading: NetWorkRateState()
+
+}
+
 
 sealed class RoomMovieState {
     data class Success(val data: Movie) : RoomMovieState()
@@ -36,3 +45,8 @@ sealed class RoomMovieState {
     object StopLoading: RoomMovieState()
 
 }
+
+
+
+
+
